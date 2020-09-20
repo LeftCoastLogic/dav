@@ -230,7 +230,7 @@ if ($migrateCalendars) {
 CREATE TABLE calendars (
     id INTEGER UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     synctoken INTEGER UNSIGNED NOT NULL DEFAULT '1',
-    components VARBINARY(21)
+    components VARBINARY(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 SQL
 );
@@ -250,7 +250,7 @@ SQL
     echo "Migrating data from old to new table\n";
 
     $pdo->exec(<<<SQL
-INSERT INTO calendars (id, synctoken, components) SELECT id, synctoken, COALESCE(components,"VEVENT,VTODO,VJOURNAL") as components FROM $calendarBackup
+INSERT INTO calendars (id, synctoken, components) SELECT id, synctoken, COALESCE(components,"VEVENT,VTODO,VJOURNAL,VFREEBUSY,VALARM") as components FROM $calendarBackup
 SQL
     );
 }
