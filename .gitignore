@@ -22,7 +22,7 @@ bin/generate_vcards
 bin/phpdocmd
 
 # Assuming every .php file in the root is for testing
-/*.php
+# /*.php
 
 # Other testing stuff
 /tmpdata
